@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Login, Splash } from '@screens/index';
 import { RootStackParamList } from './types';
+import { TabStack } from './TabNavigator';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,6 +24,13 @@ const RootNavigation = () => {
           }}
           name='Login'
           component={Login}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false
+          }}
+          name='HomeStack'
+          component={TabStack}
         />
       </Stack.Navigator>
     </NavigationContainer>

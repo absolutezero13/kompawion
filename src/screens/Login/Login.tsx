@@ -72,7 +72,7 @@ const Login = () => {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        navigation.navigate('Home');
+        navigation.navigate('HomeStack');
       }, 2000);
     } catch (err) {
     } finally {
