@@ -1,12 +1,13 @@
 import { FlatList, Image, TouchableOpacity, View } from 'react-native';
 import { stories } from '../../../feed/stories';
+import { Story } from '../../../feed/types';
 import Text from '@components/Text';
 
 import { styles } from '../styles';
 import BounceableButton from '@components/Bounceable';
 
 const Stories = () => {
-  const Story = ({ item }) => (
+  const Story = ({ item }: { item: Story }) => (
     <BounceableButton style={styles.story}>
       <Image
         source={{

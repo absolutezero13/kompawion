@@ -1,3 +1,5 @@
+import { Story } from './types';
+
 const randomPhoto = 'https://picsum.photos/200';
 
 export const stories = [
@@ -51,4 +53,4 @@ export const stories = [
     username: 'Isabella Davis',
     image: randomPhoto
   }
-];
+] as Story[];

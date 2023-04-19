@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from '@screens/Home/Home';
@@ -14,6 +14,7 @@ import HomeFilled from '@assets/icons/home-filled.svg';
 import ReelsFilled from '@assets/icons/reels-filled.svg';
 import SearchFilled from '@assets/icons/search-filled.svg';
 import HeartFilled from '@assets/icons/heart-filled.svg';
+import Kompanion from '@assets/images/kompanion.png';
 
 const getIcon = (name: string, focused: boolean) => {
   const routes = {
@@ -49,14 +50,15 @@ function TabStack() {
                   borderColor: colors.white,
                   borderWidth: 1,
                   borderRadius: 20,
-                  padding: 5
+                  padding: 3
                 }}
               >
-                <Icon
-                  width={15}
-                  height={15}
+                <Image
+                  source={Kompanion}
                   style={{
-                    color
+                    width: 25,
+                    height: 25,
+                    borderRadius: 15
                   }}
                 />
               </View>
