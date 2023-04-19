@@ -1,24 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 import {
+  ActivityIndicator,
   Alert,
   GestureResponderEvent,
   Image,
   Keyboard,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigationProp } from '@navigation/types';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Logo from '@assets/images/main-logo.png';
 import Text from '@components/Text';
-import { styles } from './styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { TextInput } from 'react-native-gesture-handler';
-
 import MetaWhite from '@assets/images/meta-white.png';
+import { styles } from './styles';
 
 const placeholders = {
   credentialSource: 'Username, email address or mobile number',
@@ -71,12 +70,12 @@ const Login = () => {
 
     try {
       setLoading(true);
-      // await login({ email, password });
-      navigation.navigate('Home');
+      setTimeout(() => {
+        setLoading(false);
+        navigation.navigate('Home');
+      }, 2000);
     } catch (err) {
-      // setError(err.message);
     } finally {
-      setLoading(false);
     }
   };
 
@@ -141,16 +140,42 @@ const Login = () => {
                 </Text>
               </View>
 
-              <TouchableOpacity style={styles.button} onPress={handleLogin}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={[
+                  styles.button,
+                  {
+                    opacity: loading ? 0.5 : 1
+                  }
+                ]}
+                disabled={loading}
+                onPress={handleLogin}
+              >
                 <Text style={styles.buttonText}>Log In</Text>
+                {loading && (
+                  <ActivityIndicator
+                    style={{ marginLeft: 5 }}
+                    size='small'
+                    color='#fff'
+                  />
+                )}
               </TouchableOpacity>
             </View>
-            <Text style={styles.forgotPassword}>Forgotten Password?</Text>
+            <Text
+              style={styles.forgotPassword}
+              onPress={() => Alert.alert('Too bad.')}
+            >
+              Forgotten Password?
+            </Text>
           </>
         </TouchableOpacity>
         {!keyboardOpen && (
           <>
-            <TouchableOpacity style={styles.createButton}>
+            <TouchableOpacity
+              onPress={() => Alert.alert('Trust me you have an account.')}
+              activeOpacity={0.8}
+              style={styles.createButton}
+            >
               <Text>Create New Account</Text>
             </TouchableOpacity>
             <Image source={MetaWhite} style={styles.meta} />

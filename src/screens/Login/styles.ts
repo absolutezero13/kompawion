@@ -53,7 +53,8 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     marginTop: 20,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'row'
   },
   buttonText: {
     fontSize: 18
