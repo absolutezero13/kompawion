@@ -1,3 +1,5 @@
 export const colors = {
-  primaryText: '#fff'
+  white: '#fff',
+  primaryBackground: '#000',
+  splashBackground: '#1b1a1b'
 };

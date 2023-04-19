@@ -11,7 +11,8 @@ module.exports = {
           '@utils': './src/utils',
           '@assets': './src/assets',
           '@theme': './src/theme',
-          '@redux': './src/redux'
+          '@redux': './src/redux',
+          '@navigation': './src/navigation'
         }
       }
     ]

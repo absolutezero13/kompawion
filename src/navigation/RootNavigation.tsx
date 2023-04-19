@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Splash } from '@screens/index';
+import { Login, Splash } from '@screens/index';
 import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -16,6 +16,13 @@ const RootNavigation = () => {
           }}
           name='Splash'
           component={Splash}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false
+          }}
+          name='Login'
+          component={Login}
         />
       </Stack.Navigator>
     </NavigationContainer>

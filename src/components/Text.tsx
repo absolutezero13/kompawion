@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   defaultText: {
     fontSize: 14,
     fontFamily: 'Roboto-Regular',
-    color: colors.primaryText
+    color: colors.white
   }
 });
 

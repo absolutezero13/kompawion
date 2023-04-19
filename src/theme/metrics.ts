@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-const BASE_PADDING_HORIZONTAL = 24;
+const BASE_PADDING_HORIZONTAL = 10;
 
 export const Metrics = {
   SCREEN_HEIGHT,
