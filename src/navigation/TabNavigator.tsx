@@ -7,7 +7,6 @@ import { colors } from '@theme/colors';
 import HomeIcon from '@assets/icons/home.svg';
 import Search from '@assets/icons/search.svg';
 import Add from '@assets/icons/add.svg';
-import Profile from '@assets/icons/kompanion.svg';
 import Reels from '@assets/icons/reels.svg';
 
 import HomeFilled from '@assets/icons/home-filled.svg';
@@ -21,7 +20,7 @@ const getIcon = (name: string, focused: boolean) => {
     Search: { icon: focused ? SearchFilled : Search },
     Add: { icon: Add },
     Reels: { icon: focused ? ReelsFilled : Reels },
-    Profile: { icon: Profile }
+    Profile: { icon: Kompanion }
   } as { [key: string]: { icon: any; name?: string } };
 
   return routes[name].icon;

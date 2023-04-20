@@ -1,9 +1,18 @@
 import { Text as RNText, StyleSheet, TextProps } from 'react-native';
 import { colors } from '@theme/colors';
 
-const Text = (props: TextProps) => {
+const Text = (props: TextProps & { bold?: boolean }) => {
   return (
-    <RNText {...props} style={[styles.defaultText, props.style]}>
+    <RNText
+      {...props}
+      style={[
+        styles.defaultText,
+        {
+          fontFamily: props.bold ? 'Roboto-Bold' : 'Roboto-Regular'
+        },
+        props.style
+      ]}
+    >
       {props.children}
     </RNText>
   );
@@ -12,7 +21,6 @@ const Text = (props: TextProps) => {
 const styles = StyleSheet.create({
   defaultText: {
     fontSize: 14,
-    fontFamily: 'Roboto-Regular',
     color: colors.white
   }
 });

@@ -108,5 +108,32 @@ export const styles = StyleSheet.create({
   },
   autoMl: {
     marginLeft: 'auto'
+  },
+  likesAndComments: {
+    paddingHorizontal: Metrics.BASE_PADDING_HORIZONTAL
+  },
+  userInfo: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    marginTop: 2
+  },
+  comments: {
+    paddingHorizontal: Metrics.BASE_PADDING_HORIZONTAL,
+    marginTop: 2
+  },
+  viewComments: {
+    color: 'rgba(255,255,255,0.5)'
+  },
+  comment: {
+    marginTop: 5
+  },
+  time: {
+    paddingHorizontal: Metrics.BASE_PADDING_HORIZONTAL
+  },
+  timeText: {
+    color: 'rgba(255,255,255,0.5)',
+    marginTop: 5,
+    fontSize: 10
   }
 });

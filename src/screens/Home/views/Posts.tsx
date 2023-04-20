@@ -9,11 +9,12 @@ import Messenger from '@assets/icons/messenger.svg';
 import Bookmark from '@assets/icons/bookmark.svg';
 import { styles } from '../styles';
 import { Metrics } from '@theme/metrics';
+import { timeAgo } from '@utils/formatTime';
 
 const Header = ({ item }) => (
   <View style={styles.postHeader}>
     <Image source={{ uri: item.userAvatar }} style={styles.avatar} />
-    <Text>{item.username}</Text>
+    <Text bold>{item.username}</Text>
     <View style={styles.dotsIcon}>
       <Dots />
     </View>
@@ -49,6 +50,43 @@ const Actions = ({ item, activeImageIndex }) => (
   </View>
 );
 
+const Details = ({ item }) => (
+  <View style={styles.likesAndComments}>
+    <Text bold>{item.likes} likes</Text>
+    <View style={styles.userInfo}>
+      <Text bold>{item.username} </Text>
+      <Text>{item.caption}</Text>
+    </View>
+  </View>
+);
+
+const Comments = ({ item }) => {
+  const [showComments, setShowComments] = useState(false);
+  return (
+    <View style={styles.comments}>
+      <Text
+        onPress={() => setShowComments(prev => !prev)}
+        style={styles.viewComments}
+      >
+        {showComments ? 'Hide' : 'View'} all {item.comments.length} comments
+      </Text>
+      {showComments &&
+        item.comments.map(comment => (
+          <View style={styles.comment}>
+            <Text bold>{comment.username}</Text>
+            <Text>{comment.text}</Text>
+          </View>
+        ))}
+    </View>
+  );
+};
+
+const Time = ({ item }) => (
+  <View style={styles.time}>
+    <Text style={styles.timeText}>{timeAgo(item.createdAt)}</Text>
+  </View>
+);
+
 const Post = ({ item }) => {
   const flatListRef = useRef(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -76,6 +114,9 @@ const Post = ({ item }) => {
         showsHorizontalScrollIndicator={false}
       />
       <Actions item={item} activeImageIndex={activeImageIndex} />
+      <Details item={item} />
+      {!!item.comments.length && <Comments item={item} />}
+      <Time item={item} />
     </>
   );
 };

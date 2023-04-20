@@ -10,13 +10,17 @@ import { posts } from '../../feed/posts';
 
 const Home = () => {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView edges={['top', 'left', 'right']} style={styles.safeArea}>
       <Header />
       <FlatList
         ListHeaderComponent={Stories}
         data={posts}
         renderItem={({ item }) => <Post item={item} />}
         keyExtractor={item => item.id.toString()}
+        contentContainerStyle={{
+          paddingBottom: 40
+        }}
+        showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );

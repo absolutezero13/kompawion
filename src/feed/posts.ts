@@ -53,6 +53,6 @@ export const posts = [
         userAvatar: 'https://picsum.photos/200'
       }
     ],
-    createdAt: new Date('2023-04-12T00:00:00.000Z')
+    createdAt: new Date('2023-04-20T12:00:00.000Z')
   }
 ];

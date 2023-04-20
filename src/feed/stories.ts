@@ -1,6 +1,6 @@
 import { Story } from './types';
 
-const randomPhoto = 'https://picsum.photos/200';
+const randomPhoto = 'https://picsum.photos/1080';
 // vL8VJ9odFyDf1yoPbTb0hzz2A586EI971Ww3TL9V7lZPHAYSQJtEOe1z
 export const stories = [
   {
