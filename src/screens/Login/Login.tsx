@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import { RootNavigationProp } from '@navigation/types';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -72,7 +72,7 @@ const Login = () => {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        navigation.navigate('HomeStack');
+        navigation.dispatch(StackActions.replace('HomeStack'));
       }, 2000);
     } catch (err) {
     } finally {

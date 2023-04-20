@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Image, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import Text from '@components/Text';
 
 import SplashImage from '@assets/images/main-logo.png';
@@ -13,7 +13,7 @@ const Splash = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Login');
+      navigation.dispatch(StackActions.replace('Login'));
     }, 2000);
   }, []);
 

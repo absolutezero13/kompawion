@@ -13,7 +13,6 @@ import Reels from '@assets/icons/reels.svg';
 import HomeFilled from '@assets/icons/home-filled.svg';
 import ReelsFilled from '@assets/icons/reels-filled.svg';
 import SearchFilled from '@assets/icons/search-filled.svg';
-import HeartFilled from '@assets/icons/heart-filled.svg';
 import Kompanion from '@assets/images/kompanion.png';
 
 const getIcon = (name: string, focused: boolean) => {
@@ -38,7 +37,8 @@ function TabStack() {
         tabBarLabel: () => null,
         tabBarStyle: {
           backgroundColor: '#000',
-          borderTopWidth: StyleSheet.hairlineWidth
+          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopColor: 'rgba(255,255,255,0.2)'
         },
         tabBarIcon: ({ focused }) => {
           const Icon = getIcon(route.name, focused);

@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: Metrics.BASE_PADDING_HORIZONTAL
+    paddingHorizontal: Metrics.BASE_PADDING_HORIZONTAL,
+    marginTop: 10
   },
   headerLogo: {
     width: 120,
@@ -23,6 +24,9 @@ export const styles = StyleSheet.create({
   },
   divider: {
     width: 10
+  },
+  bigDivider: {
+    width: 15
   },
   stories: {
     marginTop: 20,
@@ -51,5 +55,58 @@ export const styles = StyleSheet.create({
     marginTop: 5,
     opacity: 0.7,
     fontSize: 12
+  },
+  postHeader: {
+    width: Metrics.SCREEN_WIDTH,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10
+  },
+  avatar: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginRight: 10
+  },
+  dotsIcon: {
+    marginLeft: 'auto'
+  },
+  postPicture: {
+    width: Metrics.SCREEN_WIDTH,
+    height: Metrics.SCREEN_WIDTH
+  },
+  postActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    justifyContent: 'space-between'
+  },
+  dots: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: Metrics.SCREEN_WIDTH / 3
+  },
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    marginRight: 5,
+    backgroundColor: 'rgba(255,255,255,0.33)'
+  },
+  activeDot: {
+    width: 7,
+    height: 7,
+    backgroundColor: '#3897F0',
+    borderRadius: 3.5,
+    marginRight: 5
+  },
+  userActionSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: Metrics.SCREEN_WIDTH / 3
+  },
+  autoMl: {
+    marginLeft: 'auto'
   }
 });
