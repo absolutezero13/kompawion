@@ -17,3 +17,9 @@ export interface Story {
   username: string;
   image: string;
 }
+
+export interface GridPost {
+  id: number;
+  mediaItems: (Video | Photo)[] & { mediaType: string };
+}
+[];

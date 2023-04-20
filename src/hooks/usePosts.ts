@@ -9,7 +9,7 @@ const usePosts = (userId: number) => {
 
   const fetchPosts = async () => {
     try {
-      const videos = (await getVideos()) as Video[];
+      const videos = (await getVideos(false)) as Video[];
       const photos = (await getPhotos()) as Photo[];
 
       let photosIndex = -2;

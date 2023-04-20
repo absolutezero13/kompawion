@@ -1,10 +1,17 @@
 import axios from 'axios';
 import { API_KEY, PHOTO_API_ENDPOINT, VIDEO_API_ENDPOINT } from './costants';
-import { Photo, Video, VideoFile } from './types';
+import { Photo, Video } from './types';
 
-export const getVideos = async (): Promise<Video[] | unknown> => {
+export const getVideos = async (
+  forGrid: boolean
+): Promise<Video[] | unknown> => {
   try {
-    const response = await axios.get(VIDEO_API_ENDPOINT, {
+    let endPoint = VIDEO_API_ENDPOINT;
+    if (forGrid) {
+      endPoint = `${VIDEO_API_ENDPOINT}&orientation=portrait`;
+    }
+
+    const response = await axios.get(endPoint, {
       method: 'GET',
       headers: {
         Authorization: API_KEY

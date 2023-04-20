@@ -24,6 +24,7 @@ const placeholders = {
   credentialSource: 'Username, email address or mobile number',
   password: 'Password'
 };
+
 const Login = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const emailInputRef = useRef<TextInput>(null);
@@ -76,7 +77,7 @@ const Login = () => {
         navigation.dispatch(StackActions.replace('HomeStack'));
       }, 2000);
     } catch (err) {
-    } finally {
+      Alert.alert('Error', 'Something went wrong');
     }
   };
 

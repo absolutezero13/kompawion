@@ -2,10 +2,11 @@ import { Image, StyleSheet, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from '@screens/Home/Home';
+import Search from '@screens/Search/Search';
 import { colors } from '@theme/colors';
 
 import HomeIcon from '@assets/icons/home.svg';
-import Search from '@assets/icons/search.svg';
+import SearchIcon from '@assets/icons/search.svg';
 import Add from '@assets/icons/add.svg';
 import Reels from '@assets/icons/reels.svg';
 
@@ -17,7 +18,7 @@ import Kompanion from '@assets/images/kompanion.png';
 const getIcon = (name: string, focused: boolean) => {
   const routes = {
     Home: { icon: focused ? HomeFilled : HomeIcon },
-    Search: { icon: focused ? SearchFilled : Search },
+    Search: { icon: focused ? SearchFilled : SearchIcon },
     Add: { icon: Add },
     Reels: { icon: focused ? ReelsFilled : Reels },
     Profile: { icon: Kompanion }
@@ -69,7 +70,7 @@ function TabStack() {
               width={25}
               height={25}
               style={{
-                color
+                color: colors.white
               }}
             />
           );
@@ -78,7 +79,17 @@ function TabStack() {
       initialRouteName='Home'
     >
       <Tab.Screen name='Home' component={Home} />
-      <Tab.Screen name='Search' component={Home} />
+      <Tab.Screen
+        name='Search'
+        component={Search}
+        options={{
+          tabBarVisibilityAnimationConfig: {
+            show: {
+              animation: 'spring'
+            }
+          }
+        }}
+      />
       <Tab.Screen name='Add' component={Home} />
       <Tab.Screen name='Reels' component={Home} />
       <Tab.Screen name='Profile' component={Home} />

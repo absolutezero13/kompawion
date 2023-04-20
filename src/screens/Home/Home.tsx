@@ -1,17 +1,23 @@
 import { FlatList, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import usePosts from '@hooks/usePosts';
+import SearchInput from '@components/SearchInput';
+import { useNavigation } from '@react-navigation/native';
+import { RootNavigationProp } from '@navigation/types';
 
+import Post from './views/Posts';
 import Header from './views/Header';
 import { styles } from './styles';
 import Stories from './views/Stories';
-import Post from './views/Posts';
-import usePosts from '@hooks/usePosts';
+import Container from '@components/Container';
 
 const Home = () => {
+  const navigation = useNavigation<RootNavigationProp>();
   const posts = usePosts(1);
+
   return (
-    <SafeAreaView edges={['top', 'left', 'right']} style={styles.safeArea}>
+    <Container>
       <Header />
+      <SearchInput disabled onPressIn={() => navigation.navigate('Search')} />
       <FlatList
         ListHeaderComponent={Stories}
         data={posts}
@@ -23,7 +29,7 @@ const Home = () => {
         }}
         showsVerticalScrollIndicator={false}
       />
-    </SafeAreaView>
+    </Container>
   );
 };
 
