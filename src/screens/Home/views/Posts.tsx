@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import { FlatList, Image, View } from 'react-native';
-import Video from 'react-native-video';
 
 import Text from '@components/Text';
 import Dots from '@assets/icons/dots.svg';
@@ -12,6 +11,7 @@ import { Metrics } from '@theme/metrics';
 import { timeAgo } from '@utils/formatTime';
 import { styles } from '../styles';
 import { Post as TPost } from 'src/feed/types';
+import CustomVideo from '@components/CustomVideo';
 
 type Item = {
   item: TPost;
@@ -83,7 +83,7 @@ const Comments = ({ item }: Item) => {
       </Text>
       {showComments &&
         item.comments.map(comment => (
-          <View style={styles.comment}>
+          <View key={comment.id.toString()} style={styles.comment}>
             <Text bold>{comment.username}</Text>
             <Text>{comment.text}</Text>
           </View>
@@ -108,7 +108,6 @@ const Post = ({ item }: Item) => {
     setActiveImageIndex(activeImageIndex);
   };
 
-  console.log('item.mediaItems', item.mediaItems);
   return (
     <>
       <Header item={item} />
@@ -120,16 +119,7 @@ const Post = ({ item }: Item) => {
         scrollEventThrottle={16}
         renderItem={({ item }) =>
           item.duration ? (
-            <Video
-              repeat
-              source={{ uri: item.video_files[2].link }}
-              // onBuffer={this.onBuffer}
-              // onError={this.videoError}
-              style={{
-                width: Metrics.SCREEN_WIDTH,
-                height: Metrics.SCREEN_WIDTH
-              }}
-            />
+            <CustomVideo item={item} />
           ) : (
             <Image
               source={{ uri: item?.src?.large2x }}

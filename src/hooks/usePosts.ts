@@ -20,13 +20,17 @@ const usePosts = (userId: number) => {
         photosIndex += 2;
         videosIndex += 1;
 
+        const shouldGetVideo = index % 2 !== 0;
+
         return {
           ...post,
           userAvatar: `https://picsum.photos/200?random=${index}`,
-          mediaItems:
-            index % 2 === 0
-              ? videos.slice(videosIndex, videosIndex + 1)
-              : photos.slice(photosIndex, photosIndex + 2)
+          username: shouldGetVideo
+            ? videos[videosIndex].user.name
+            : photos[photosIndex].photographer,
+          mediaItems: shouldGetVideo
+            ? videos.slice(videosIndex, videosIndex + 1)
+            : photos.slice(photosIndex, photosIndex + 2)
         };
       });
 

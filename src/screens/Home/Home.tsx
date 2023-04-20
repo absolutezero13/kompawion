@@ -16,6 +16,7 @@ const Home = () => {
         ListHeaderComponent={Stories}
         data={posts}
         renderItem={({ item }) => <Post item={item} />}
+        ItemSeparatorComponent={() => <View style={styles.postSeperator} />}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={{
           paddingBottom: 40

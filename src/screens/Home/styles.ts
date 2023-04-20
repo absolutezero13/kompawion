@@ -32,7 +32,8 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     height: 100,
     borderBottomColor: 'rgba(255,255,255,0.2)',
-    borderBottomWidth: StyleSheet.hairlineWidth
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: Metrics.BASE_PADDING_HORIZONTAL
   },
   story: {
     padding: 2,
@@ -135,5 +136,8 @@ export const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.5)',
     marginTop: 5,
     fontSize: 10
+  },
+  postSeperator: {
+    height: 10
   }
 });
