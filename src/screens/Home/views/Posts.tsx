@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { FlatList, Image, View } from 'react-native';
+import Video from 'react-native-video';
 
 import Text from '@components/Text';
 import Dots from '@assets/icons/dots.svg';
@@ -7,11 +8,16 @@ import Heart from '@assets/icons/heart.svg';
 import Comment from '@assets/icons/comment.svg';
 import Messenger from '@assets/icons/messenger.svg';
 import Bookmark from '@assets/icons/bookmark.svg';
-import { styles } from '../styles';
 import { Metrics } from '@theme/metrics';
 import { timeAgo } from '@utils/formatTime';
+import { styles } from '../styles';
+import { Post as TPost } from 'src/feed/types';
 
-const Header = ({ item }) => (
+type Item = {
+  item: TPost;
+};
+
+const Header = ({ item }: Item) => (
   <View style={styles.postHeader}>
     <Image source={{ uri: item.userAvatar }} style={styles.avatar} />
     <Text bold>{item.username}</Text>
@@ -21,7 +27,12 @@ const Header = ({ item }) => (
   </View>
 );
 
-const Actions = ({ item, activeImageIndex }) => (
+const Actions = ({
+  item,
+  activeImageIndex
+}: Item & {
+  activeImageIndex: number;
+}) => (
   <View style={styles.postActions}>
     <View style={styles.userActionSection}>
       <Heart />
@@ -30,12 +41,12 @@ const Actions = ({ item, activeImageIndex }) => (
       <View style={styles.bigDivider} />
       <Messenger />
     </View>
-    {item.pictures.length > 1 && (
+    {item.mediaItems.length > 1 && (
       <View style={styles.dots}>
-        {item.pictures.map((pic, index: number) => {
+        {item.mediaItems.map((pic, index: number) => {
           return (
             <View
-              key={pic.order.toString()}
+              key={pic.id.toString()}
               style={[
                 activeImageIndex === index ? styles.activeDot : styles.dot
               ]}
@@ -50,7 +61,7 @@ const Actions = ({ item, activeImageIndex }) => (
   </View>
 );
 
-const Details = ({ item }) => (
+const Details = ({ item }: Item) => (
   <View style={styles.likesAndComments}>
     <Text bold>{item.likes} likes</Text>
     <View style={styles.userInfo}>
@@ -60,7 +71,7 @@ const Details = ({ item }) => (
   </View>
 );
 
-const Comments = ({ item }) => {
+const Comments = ({ item }: Item) => {
   const [showComments, setShowComments] = useState(false);
   return (
     <View style={styles.comments}>
@@ -81,13 +92,13 @@ const Comments = ({ item }) => {
   );
 };
 
-const Time = ({ item }) => (
+const Time = ({ item }: Item) => (
   <View style={styles.time}>
     <Text style={styles.timeText}>{timeAgo(item.createdAt)}</Text>
   </View>
 );
 
-const Post = ({ item }) => {
+const Post = ({ item }: Item) => {
   const flatListRef = useRef(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -97,18 +108,36 @@ const Post = ({ item }) => {
     setActiveImageIndex(activeImageIndex);
   };
 
+  console.log('item.mediaItems', item.mediaItems);
   return (
     <>
       <Header item={item} />
       <FlatList
         ref={flatListRef}
-        data={item.pictures}
+        data={item.mediaItems}
+        bounces={item.mediaItems.length > 1}
         onScroll={onScroll}
         scrollEventThrottle={16}
-        renderItem={({ item }) => (
-          <Image source={{ uri: item.url }} style={styles.postPicture} />
-        )}
-        keyExtractor={item => item.order}
+        renderItem={({ item }) =>
+          item.duration ? (
+            <Video
+              repeat
+              source={{ uri: item.video_files[2].link }}
+              // onBuffer={this.onBuffer}
+              // onError={this.videoError}
+              style={{
+                width: Metrics.SCREEN_WIDTH,
+                height: Metrics.SCREEN_WIDTH
+              }}
+            />
+          ) : (
+            <Image
+              source={{ uri: item?.src?.large2x }}
+              style={styles.postPicture}
+            />
+          )
+        }
+        keyExtractor={item => item.id.toString()}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}

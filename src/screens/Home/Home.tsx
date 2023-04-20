@@ -1,14 +1,14 @@
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Header from './views/Header';
 import { styles } from './styles';
 import Stories from './views/Stories';
-import Posts from './views/Posts';
 import Post from './views/Posts';
-import { posts } from '../../feed/posts';
+import usePosts from '@hooks/usePosts';
 
 const Home = () => {
+  const posts = usePosts(1);
   return (
     <SafeAreaView edges={['top', 'left', 'right']} style={styles.safeArea}>
       <Header />
