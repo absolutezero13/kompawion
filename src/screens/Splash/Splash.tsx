@@ -7,14 +7,28 @@ import SplashImage from '@assets/images/main-logo.png';
 import Meta from '@assets/images/meta.png';
 import { styles } from './styles';
 import { RootNavigationProp } from '@navigation/types';
+import { getGenericPassword } from 'react-native-keychain';
 
 const Splash = () => {
   const navigation = useNavigation<RootNavigationProp>();
 
+  const checkUserAndNavigate = async () => {
+    try {
+      const credentials = await getGenericPassword();
+      if (credentials) {
+        setTimeout(() => {
+          navigation.dispatch(StackActions.replace('HomeStack'));
+        }, 500);
+      } else {
+        setTimeout(() => {
+          navigation.dispatch(StackActions.replace('Login'));
+        }, 1000);
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      navigation.dispatch(StackActions.replace('Login'));
-    }, 2000);
+    checkUserAndNavigate();
   }, []);
 
   return (

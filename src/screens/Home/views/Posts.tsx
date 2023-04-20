@@ -1,5 +1,11 @@
 import { useRef, useState } from 'react';
-import { FlatList, Image, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  View
+} from 'react-native';
 
 import Text from '@components/Text';
 import Dots from '@assets/icons/dots.svg';
@@ -102,7 +108,7 @@ const Post = ({ item }: Item) => {
   const flatListRef = useRef(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const onScroll = event => {
+  const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const activeImageIndex = Math.round(contentOffsetX / Metrics.SCREEN_WIDTH);
     setActiveImageIndex(activeImageIndex);

@@ -13,6 +13,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { RootNavigationProp } from '@navigation/types';
 import LinearGradient from 'react-native-linear-gradient';
+import { setGenericPassword } from 'react-native-keychain';
 
 import Logo from '@assets/images/main-logo.png';
 import Text from '@components/Text';
@@ -23,7 +24,6 @@ const placeholders = {
   credentialSource: 'Username, email address or mobile number',
   password: 'Password'
 };
-
 const Login = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const emailInputRef = useRef<TextInput>(null);
@@ -69,6 +69,7 @@ const Login = () => {
     }
 
     try {
+      await setGenericPassword(email, password);
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
@@ -139,7 +140,6 @@ const Login = () => {
                   {passwordFocused || password ? placeholders.password : ''}
                 </Text>
               </View>
-
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={[
