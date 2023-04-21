@@ -7,33 +7,20 @@ import { styles } from '../styles';
 interface GridItemProps {
   item: GridPost;
   index: number;
-  searchText: string;
 }
 
-const GridVideo = ({
-  item,
-  searchText
-}: {
-  item: GridPost;
-  searchText: string;
-}) => {
+const GridVideo = ({ item }: { item: GridPost }) => {
   const video = item.mediaItems.find(
     mediaItem => mediaItem?.mediaType === 'video'
   );
 
-  if (
-    !video ||
-    (searchText &&
-      video?.video_files[1].link
-        ?.toLowerCase()
-        .includes(searchText.toLowerCase()))
-  ) {
+  if (!video) {
     return null;
   }
 
   return (
     <Video
-      source={{ uri: video?.video_files[1].link }}
+      source={{ uri: video?.video_files?.[0].link }}
       style={styles.video}
       resizeMode='cover'
       repeat
@@ -46,7 +33,7 @@ const GridPhoto = ({ photo }: { photo: Photo }) => {
   return <Image source={{ uri: photo.src.large2x }} style={styles.photo} />;
 };
 
-const GridItem = ({ item, index, searchText }: GridItemProps) => {
+const GridItem = ({ item, index }: GridItemProps) => {
   const videoInTheBeginning = index % 2 === 0;
 
   return (
@@ -55,21 +42,17 @@ const GridItem = ({ item, index, searchText }: GridItemProps) => {
         flexDirection: 'row'
       }}
     >
-      {videoInTheBeginning && <GridVideo item={item} searchText={searchText} />}
+      {videoInTheBeginning && <GridVideo item={item} />}
       <FlatList
         data={item.mediaItems.filter(
-          mediaItem =>
-            mediaItem?.mediaType === 'photo' &&
-            mediaItem?.url.toLowerCase().includes(searchText.toLowerCase())
+          mediaItem => mediaItem?.mediaType === 'photo'
         )}
         renderItem={({ item }) => <GridPhoto photo={item as Photo} />}
         keyExtractor={item => item.id.toString()}
         numColumns={2}
         scrollEnabled={false}
       />
-      {!videoInTheBeginning && (
-        <GridVideo item={item} searchText={searchText} />
-      )}
+      {!videoInTheBeginning && <GridVideo item={item} />}
     </View>
   );
 };

@@ -14,9 +14,8 @@ const CustomVideo = ({ item }: { item: TVideo }) => {
   const handleVideoPress = () => {
     setPaused(p => !p);
   };
-  const videoWithHighestQuality = item.video_files[2];
-  const aspectRatio =
-    videoWithHighestQuality.width / videoWithHighestQuality.height;
+  const video = item.video_files[0];
+  const aspectRatio = video.width / video.height;
 
   return (
     <TouchableWithoutFeedback onPress={handleVideoPress}>
@@ -25,7 +24,7 @@ const CustomVideo = ({ item }: { item: TVideo }) => {
         volume={0}
         repeat
         paused={paused}
-        source={{ uri: item.video_files[2].link }}
+        source={{ uri: video.link }}
         style={{
           width: Metrics.SCREEN_WIDTH,
           height:

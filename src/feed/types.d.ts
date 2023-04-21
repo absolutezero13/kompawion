@@ -20,6 +20,8 @@ export interface Story {
 
 export interface GridPost {
   id: number;
-  mediaItems: (Video | Photo)[] & { mediaType: string };
+  mediaItems: (
+    | (Video & { mediaType: string })
+    | (Photo & { mediaType: string })
+  )[];
 }
-[];
