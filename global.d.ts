@@ -4,6 +4,12 @@ declare module '*.png' {
   export default value;
 }
 
+declare module '*.jpeg' {
+  import { ImageSourcePropType } from 'react-native';
+  const value: ImageSourcePropType;
+  export default value;
+}
+
 declare module '*.svg' {
   const value: any;
   export default value;

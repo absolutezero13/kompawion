@@ -10,9 +10,12 @@ import { useMemo, useState } from 'react';
 import { arrangeDataForGrid } from '@utils/arrangeData';
 import { Photo, Video } from 'src/api/types';
 
+const MAX_POST_COUNT = 6;
+
 const Search = () => {
   const posts = useGridPosts(1);
   const [searchText, setSearchText] = useState<string>('');
+  const [numberOfPosts, setNumberOfPosts] = useState(3);
 
   const filteredPosts = useMemo(() => {
     if (!searchText) {
@@ -55,13 +58,18 @@ const Search = () => {
       <FadeInView>
         <SearchInput focusOnMount value={searchText} setValue={setSearchText} />
         <FlatList
-          data={filteredPosts}
+          data={filteredPosts.slice(0, numberOfPosts)}
           renderItem={({ item, index }) => (
-            <GridItem item={item} index={index} searchText={searchText} />
+            <GridItem item={item} index={index} />
           )}
           style={styles.list}
           keyExtractor={item => item.id.toString()}
           showsVerticalScrollIndicator={false}
+          onEndReached={
+            numberOfPosts < MAX_POST_COUNT
+              ? () => setNumberOfPosts(prev => prev + 3)
+              : undefined
+          }
         />
       </FadeInView>
     </Container>

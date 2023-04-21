@@ -18,6 +18,8 @@ import { timeAgo } from '@utils/formatTime';
 import { styles } from '../styles';
 import { Post as TPost } from 'src/feed/types';
 import CustomVideo from '@components/CustomVideo';
+import ResizedImage from '@components/ResizedImage';
+import { getPhotoFromAWS } from '@utils/getPhotoFromAWS';
 
 type Item = {
   item: TPost;
@@ -104,7 +106,7 @@ const Time = ({ item }: Item) => (
   </View>
 );
 
-const Post = ({ item }: Item) => {
+const Post = ({ item, postIndex }: Item & { postIndex: number }) => {
   const flatListRef = useRef(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -123,16 +125,16 @@ const Post = ({ item }: Item) => {
         bounces={item.mediaItems.length > 1}
         onScroll={onScroll}
         scrollEventThrottle={16}
-        renderItem={({ item }) =>
-          item.duration ? (
+        renderItem={({ item, index }) => {
+          return item.duration ? (
             <CustomVideo item={item} />
           ) : (
             <Image
-              source={{ uri: item?.src?.large2x }}
+              source={{ uri: getPhotoFromAWS(postIndex + index) }}
               style={styles.postPicture}
             />
-          )
-        }
+          );
+        }}
         keyExtractor={item => item.id.toString()}
         horizontal
         pagingEnabled

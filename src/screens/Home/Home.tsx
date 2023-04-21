@@ -1,33 +1,44 @@
+import { useState } from 'react';
 import { FlatList, View } from 'react-native';
 import usePosts from '@hooks/usePosts';
 import SearchInput from '@components/SearchInput';
+import Container from '@components/Container';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigationProp } from '@navigation/types';
 
 import Post from './views/Posts';
 import Header from './views/Header';
-import { styles } from './styles';
 import Stories from './views/Stories';
-import Container from '@components/Container';
+import { styles } from './styles';
+
+const MAX_POST_COUNT = 10;
 
 const Home = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const posts = usePosts(1);
+  const [numberOfPosts, setNumberOfPosts] = useState(3);
 
   return (
     <Container>
       <Header />
-      <SearchInput disabled onPressIn={() => navigation.navigate('Search')} />
+      <SearchInput onPressIn={() => navigation.navigate('Search')} />
       <FlatList
         ListHeaderComponent={Stories}
-        data={posts}
-        renderItem={({ item }) => <Post item={item} />}
+        data={posts.slice(0, numberOfPosts)}
+        renderItem={({ item, index: postIndex }) => (
+          <Post item={item} postIndex={postIndex} />
+        )}
         ItemSeparatorComponent={() => <View style={styles.postSeperator} />}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={{
           paddingBottom: 40
         }}
         showsVerticalScrollIndicator={false}
+        onEndReached={
+          numberOfPosts < MAX_POST_COUNT
+            ? () => setNumberOfPosts(prev => prev + 3)
+            : undefined
+        }
       />
     </Container>
   );

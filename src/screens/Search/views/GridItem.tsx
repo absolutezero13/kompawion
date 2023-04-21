@@ -3,6 +3,7 @@ import Video from 'react-native-video';
 import { Photo } from 'src/api/types';
 import { GridPost } from 'src/feed/types';
 import { styles } from '../styles';
+import { getPhotoFromAWS } from '@utils/getPhotoFromAWS';
 
 interface GridItemProps {
   item: GridPost;
@@ -29,8 +30,21 @@ const GridVideo = ({ item }: { item: GridPost }) => {
   );
 };
 
-const GridPhoto = ({ photo }: { photo: Photo }) => {
-  return <Image source={{ uri: photo.src.large2x }} style={styles.photo} />;
+const GridPhoto = ({
+  photo,
+  index,
+  postIndex
+}: {
+  photo: Photo;
+  index: number;
+}) => {
+  return (
+    <Image
+      source={{ uri: getPhotoFromAWS(postIndex * 4 + index) }}
+      progressiveRenderingEnabled
+      style={styles.photo}
+    />
+  );
 };
 
 const GridItem = ({ item, index }: GridItemProps) => {
@@ -47,7 +61,13 @@ const GridItem = ({ item, index }: GridItemProps) => {
         data={item.mediaItems.filter(
           mediaItem => mediaItem?.mediaType === 'photo'
         )}
-        renderItem={({ item }) => <GridPhoto photo={item as Photo} />}
+        renderItem={({ item, index: photoIndex }) => (
+          <GridPhoto
+            photo={item as Photo}
+            index={photoIndex}
+            postIndex={index}
+          />
+        )}
         keyExtractor={item => item.id.toString()}
         numColumns={2}
         scrollEnabled={false}
