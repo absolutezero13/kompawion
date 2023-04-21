@@ -19,5 +19,10 @@ export const styles = StyleSheet.create({
     width: ITEM_WIDTH,
     borderWidth: 1,
     borderColor: '#000'
+  },
+  loading: {
+    position: 'absolute',
+    width: Metrics.SCREEN_WIDTH / 3,
+    height: Metrics.SCREEN_WIDTH / 3
   }
 });

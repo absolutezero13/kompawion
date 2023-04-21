@@ -1,10 +1,11 @@
 import { Photo, Video } from 'src/api/types';
+import { GridPost } from 'src/feed/types';
 
 export const arrangeDataForGrid = (
   videos: Video[],
   photos: Photo[],
   ITEM_COUNT: number
-) => {
+): GridPost[] => {
   // Grid will be 4 photos and 1 video
   let photosIndex = 0;
   let videosIndex = 0;

@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { Metrics } from '@theme/metrics';
 import { ActivityIndicator, FlatList, Image, View } from 'react-native';
-
 import Video from 'react-native-video';
+
 import { Photo } from 'src/api/types';
 import { GridPost } from 'src/feed/types';
 import { styles } from '../styles';
-import { getPhotoFromAWS } from '@utils/getPhotoFromAWS';
 
 interface GridItemProps {
   item: GridPost;
@@ -33,29 +31,14 @@ const GridVideo = ({ item }: { item: GridPost }) => {
   );
 };
 
-const GridPhoto = ({
-  photo,
-  index,
-  postIndex
-}: {
-  photo: Photo;
-  index: number;
-}) => {
+const GridPhoto = ({ photo }: { photo: Photo }) => {
   const [loading, setLoading] = useState(false);
 
   return (
     <View>
-      {loading && (
-        <ActivityIndicator
-          style={{
-            position: 'absolute',
-            width: Metrics.SCREEN_WIDTH / 3,
-            height: Metrics.SCREEN_WIDTH / 3
-          }}
-        />
-      )}
+      {loading && <ActivityIndicator style={styles.loading} />}
       <Image
-        source={{ uri: getPhotoFromAWS(postIndex * 4 + index) }}
+        source={{ uri: photo.src.large2x }}
         progressiveRenderingEnabled
         style={styles.photo}
         onLoadStart={() => setLoading(true)}
@@ -79,13 +62,7 @@ const GridItem = ({ item, index }: GridItemProps) => {
         data={item.mediaItems.filter(
           mediaItem => mediaItem?.mediaType === 'photo'
         )}
-        renderItem={({ item, index: photoIndex }) => (
-          <GridPhoto
-            photo={item as Photo}
-            index={photoIndex}
-            postIndex={index}
-          />
-        )}
+        renderItem={({ item }) => <GridPhoto photo={item as Photo} />}
         keyExtractor={item => item.id.toString()}
         numColumns={2}
         scrollEnabled={false}

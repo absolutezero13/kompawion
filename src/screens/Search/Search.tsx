@@ -8,7 +8,7 @@ import GridItem from './views/GridItem';
 import { styles } from './styles';
 import { useMemo, useState } from 'react';
 import { arrangeDataForGrid } from '@utils/arrangeData';
-import { Photo, Video } from 'src/api/types';
+import { GridMediaItem } from 'src/feed/types';
 
 const MAX_POST_COUNT = 6;
 
@@ -22,35 +22,34 @@ const Search = () => {
       return posts;
     }
 
-    // const videos = [] as Video[];
-    // const photos = [] as Photo[];
+    const videos = [] as GridMediaItem[];
+    const photos = [] as GridMediaItem[];
 
-    // posts.forEach(post => {
-    //   const video = post.mediaItems.find(
-    //     mediaItem => mediaItem?.mediaType === 'video'
-    //   );
-    //   const filteredPhotos = post.mediaItems.filter(
-    //     mediaItem =>
-    //       mediaItem?.mediaType === 'photo' &&
-    //       mediaItem?.url.includes(searchText)
-    //   );
+    posts.forEach(post => {
+      const video = post.mediaItems.find(
+        mediaItem => mediaItem?.mediaType === 'video'
+      );
+      const filteredPhotos = post.mediaItems.filter(
+        mediaItem =>
+          mediaItem?.mediaType === 'photo' &&
+          mediaItem?.url.includes(searchText)
+      );
 
-    //   if (video?.video_files[1].link?.includes(searchText)) {
-    //     videos.push(video);
-    //   }
+      if (video?.video_files[1].link?.includes(searchText)) {
+        videos.push(video);
+      }
 
-    //   if (filteredPhotos.length) {
-    //     photos.push(...filteredPhotos);
-    //   }
-    // });
+      if (filteredPhotos.length) {
+        photos.push(...filteredPhotos);
+      }
+    });
 
-    // const allItemsLength = videos.length + photos.length;
-    // const itemCount = Math.ceil(allItemsLength / 5);
+    console.log('videos', videos, 'photos', photos);
 
-    // const arrangedData = arrangeDataForGrid(photos, videos, itemCount);
-
-    // return arrangedData;
-    return posts;
+    const allItemsLength = videos.length + photos.length;
+    const itemCount = Math.ceil(allItemsLength / 5);
+    const arrangedData = arrangeDataForGrid(videos, photos, itemCount);
+    return arrangedData;
   }, [posts, searchText]);
 
   return (

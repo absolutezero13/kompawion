@@ -18,10 +18,10 @@ export interface Story {
   image: string;
 }
 
+export type GridMediaItem =
+  | (Video & { mediaType: string })
+  | (Photo & { mediaType: string });
 export interface GridPost {
   id: number;
-  mediaItems: (
-    | (Video & { mediaType: string })
-    | (Photo & { mediaType: string })
-  )[];
+  mediaItems: GridMediaItem[];
 }

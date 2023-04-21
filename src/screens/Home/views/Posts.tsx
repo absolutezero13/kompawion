@@ -130,7 +130,7 @@ const Post = ({ item, postIndex }: Item & { postIndex: number }) => {
             <CustomVideo item={item} />
           ) : (
             <Image
-              source={{ uri: getPhotoFromAWS(postIndex + index) }}
+              source={{ uri: item?.src?.large2x }}
               style={styles.postPicture}
             />
           );
