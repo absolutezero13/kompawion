@@ -1,4 +1,7 @@
-import { FlatList, Image, View } from 'react-native';
+import { useState } from 'react';
+import { Metrics } from '@theme/metrics';
+import { ActivityIndicator, FlatList, Image, View } from 'react-native';
+
 import Video from 'react-native-video';
 import { Photo } from 'src/api/types';
 import { GridPost } from 'src/feed/types';
@@ -38,12 +41,27 @@ const GridPhoto = ({
   photo: Photo;
   index: number;
 }) => {
+  const [loading, setLoading] = useState(false);
+
   return (
-    <Image
-      source={{ uri: getPhotoFromAWS(postIndex * 4 + index) }}
-      progressiveRenderingEnabled
-      style={styles.photo}
-    />
+    <View>
+      {loading && (
+        <ActivityIndicator
+          style={{
+            position: 'absolute',
+            width: Metrics.SCREEN_WIDTH / 3,
+            height: Metrics.SCREEN_WIDTH / 3
+          }}
+        />
+      )}
+      <Image
+        source={{ uri: getPhotoFromAWS(postIndex * 4 + index) }}
+        progressiveRenderingEnabled
+        style={styles.photo}
+        onLoadStart={() => setLoading(true)}
+        onLoadEnd={() => setLoading(false)}
+      />
+    </View>
   );
 };
 
