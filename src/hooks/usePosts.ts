@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { posts as staticPosts } from '../feed/posts';
-import { getPhotos, getVideos } from '../api/post';
 import { Post } from 'src/feed/types';
-import { Photo, Video } from 'src/api/types';
+import { posts as staticPosts } from '../feed/posts';
+import { Photo, Video } from '../api/types';
+import { getPhotos, getVideos } from '../api/post';
 
 export const MAX_POST_COUNT = 30;
 

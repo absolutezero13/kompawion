@@ -45,22 +45,8 @@ function TabStack() {
           const color = focused ? colors.white : '';
           if (route.name === 'Profile') {
             return (
-              <View
-                style={{
-                  borderColor: colors.white,
-                  borderWidth: 1,
-                  borderRadius: 20,
-                  padding: 3
-                }}
-              >
-                <Image
-                  source={Kompanion}
-                  style={{
-                    width: 25,
-                    height: 25,
-                    borderRadius: 15
-                  }}
-                />
+              <View style={styles.profile}>
+                <Image source={Kompanion} style={styles.komp} />
               </View>
             );
           }
@@ -96,5 +82,19 @@ function TabStack() {
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  profile: {
+    borderColor: colors.white,
+    borderWidth: 1,
+    borderRadius: 20,
+    padding: 3
+  },
+  komp: {
+    width: 25,
+    height: 25,
+    borderRadius: 15
+  }
+});
 
 export { TabStack };

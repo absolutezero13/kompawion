@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import Search from '@assets/icons/search.svg';
 import { colors } from '@theme/colors';

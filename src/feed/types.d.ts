@@ -4,7 +4,7 @@ export interface Post {
   id: number;
   username: string;
   userAvatar: string;
-  mediaItems: Video[] | Photo[];
+  mediaItems: (Video | Photo)[];
   caption: string;
   likes: number;
   userLiked: boolean;

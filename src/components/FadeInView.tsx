@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { Animated, Easing } from 'react-native';
-import {
-  NavigationContainer,
-  useFocusEffect,
-  useNavigation
-} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-const FadeInView = ({ children }) => {
+interface Props {
+  children: React.ReactNode | React.ReactNode[];
+}
+
+const FadeInView = ({ children }: Props) => {
   const navigation = useNavigation();
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -30,10 +30,10 @@ const FadeInView = ({ children }) => {
   }, []);
 
   return (
-    <Animated.View // Special animatable View
+    <Animated.View
       style={{
         flex: 1,
-        opacity: fadeAnim // Bind opacity to animated value
+        opacity: fadeAnim
       }}
     >
       {children}

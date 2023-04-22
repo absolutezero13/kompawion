@@ -4,7 +4,7 @@ import usePosts, { MAX_POST_COUNT } from '@hooks/usePosts';
 import SearchInput from '@components/SearchInput';
 import Container from '@components/Container';
 import { useNavigation } from '@react-navigation/native';
-import { RootNavigationProp } from '@navigation/types';
+import { TabNavigationProp } from '@navigation/types';
 
 import Post from './views/Posts';
 import Header from './views/Header';
@@ -12,7 +12,7 @@ import Stories from './views/Stories';
 import { styles } from './styles';
 
 const Home = () => {
-  const navigation = useNavigation<RootNavigationProp>();
+  const navigation = useNavigation<TabNavigationProp>();
   const posts = usePosts(1);
   const [numberOfPosts, setNumberOfPosts] = useState(3);
 
@@ -23,9 +23,7 @@ const Home = () => {
       <FlatList
         ListHeaderComponent={Stories}
         data={posts.slice(0, numberOfPosts)}
-        renderItem={({ item, index: postIndex }) => (
-          <Post item={item} postIndex={postIndex} />
-        )}
+        renderItem={({ item }) => <Post item={item} />}
         ItemSeparatorComponent={() => <View style={styles.postSeperator} />}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={{

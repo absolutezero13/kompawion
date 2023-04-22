@@ -31,12 +31,6 @@ export interface VideoFile {
   link: string;
 }
 
-// {
-//   "id": 133236,
-//   "picture": "https://static-videos.pexels.com/videos/1448735/pictures/preview-0.jpg",
-//   "nr": 0
-// },
-
 interface VideoPicture {
   id: number;
   picture: string;

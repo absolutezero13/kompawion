@@ -8,18 +8,19 @@ import {
 } from 'react-native';
 
 import Text from '@components/Text';
+import CustomVideo from '@components/CustomVideo';
+
 import Dots from '@assets/icons/dots.svg';
 import Heart from '@assets/icons/heart.svg';
 import Comment from '@assets/icons/comment.svg';
 import Messenger from '@assets/icons/messenger.svg';
 import Bookmark from '@assets/icons/bookmark.svg';
+
 import { Metrics } from '@theme/metrics';
 import { timeAgo } from '@utils/formatTime';
 import { styles } from '../styles';
 import { Post as TPost } from 'src/feed/types';
-import CustomVideo from '@components/CustomVideo';
-import ResizedImage from '@components/ResizedImage';
-import { getPhotoFromAWS } from '@utils/getPhotoFromAWS';
+import { Photo, Video } from 'src/api/types';
 
 type Item = {
   item: TPost;
@@ -106,7 +107,7 @@ const Time = ({ item }: Item) => (
   </View>
 );
 
-const Post = ({ item, postIndex }: Item & { postIndex: number }) => {
+const Post = ({ item }: Item) => {
   const flatListRef = useRef(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -126,11 +127,11 @@ const Post = ({ item, postIndex }: Item & { postIndex: number }) => {
         onScroll={onScroll}
         scrollEventThrottle={16}
         renderItem={({ item, index }) => {
-          return item.duration ? (
-            <CustomVideo item={item} />
+          return (item as Video).duration ? (
+            <CustomVideo item={item as Video} />
           ) : (
             <Image
-              source={{ uri: item?.src?.large2x }}
+              source={{ uri: (item as Photo).src?.large2x }}
               style={styles.postPicture}
             />
           );

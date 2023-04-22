@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import { arrangeDataForGrid } from '@utils/arrangeData';
 import { getPhotos, getVideos } from '../api/post';
 import { GridPost } from 'src/feed/types';
 import { Photo, Video } from 'src/api/types';
-import { arrangeDataForGrid } from '@utils/arrangeData';
 
 export const MAX_POST_COUNT = 12;
 

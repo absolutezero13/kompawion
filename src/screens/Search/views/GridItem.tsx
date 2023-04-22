@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ActivityIndicator, FlatList, Image, View } from 'react-native';
 import Video from 'react-native-video';
 
-import { Photo } from 'src/api/types';
+import { Photo, Video as TVideo } from 'src/api/types';
 import { GridPost } from 'src/feed/types';
 import { styles } from '../styles';
 
@@ -22,7 +22,9 @@ const GridVideo = ({ item }: { item: GridPost }) => {
 
   return (
     <Video
-      source={{ uri: video?.video_files?.[0].link }}
+      poster={(video as TVideo)?.video_pictures?.[0].picture}
+      posterResizeMode='cover'
+      source={{ uri: (video as TVideo)?.video_files?.[0].link }}
       style={styles.video}
       resizeMode='cover'
       repeat
