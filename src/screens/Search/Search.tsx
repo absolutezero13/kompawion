@@ -30,7 +30,7 @@ const Search = () => {
       const filteredPhotos = post.mediaItems.filter(
         mediaItem =>
           mediaItem?.mediaType === 'photo' &&
-          mediaItem?.url.includes(searchText)
+          mediaItem?.alt.includes(searchText)
       );
 
       if (video?.video_files[1].link?.includes(searchText)) {

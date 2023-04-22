@@ -70,12 +70,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 15,
     marginHorizontal: 10,
-    height: 32
+    height: 36
   },
   input: {
     flex: 1,
     marginLeft: 10,
-    color: colors.white
+    color: colors.white,
+    fontSize: 12,
+    height: 36
   }
 });
 

@@ -20,6 +20,8 @@ const CustomVideo = ({ item }: { item: TVideo }) => {
   return (
     <TouchableWithoutFeedback onPress={handleVideoPress}>
       <Video
+        poster={item.video_pictures[0].picture}
+        posterResizeMode='cover'
         ref={videoRef}
         volume={0}
         repeat
