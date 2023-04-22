@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_KEY, PHOTO_API_ENDPOINT, VIDEO_API_ENDPOINT } from './costants';
+import { API_KEY, PHOTO_API_ENDPOINT, VIDEO_API_ENDPOINT } from './constants';
 import { Photo, Video } from './types';
 
 export const getVideos = async (

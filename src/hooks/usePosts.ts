@@ -4,6 +4,8 @@ import { getPhotos, getVideos } from '../api/post';
 import { Post } from 'src/feed/types';
 import { Photo, Video } from 'src/api/types';
 
+export const MAX_POST_COUNT = 30;
+
 const usePosts = (userId: number) => {
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -20,6 +22,7 @@ const usePosts = (userId: number) => {
         photosIndex += 2;
         videosIndex += 1;
 
+        // ONE POST VIDEO - ONE POST PHOTO
         const shouldGetVideo = index % 2 !== 0;
 
         return {

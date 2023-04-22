@@ -2,15 +2,13 @@ import { FlatList } from 'react-native';
 import Container from '@components/Container';
 import SearchInput from '@components/SearchInput';
 import FadeInView from '@components/FadeInView';
-import useGridPosts from '@hooks/useGridPosts';
+import useGridPosts, { MAX_POST_COUNT } from '@hooks/useGridPosts';
 
 import GridItem from './views/GridItem';
 import { styles } from './styles';
 import { useMemo, useState } from 'react';
 import { arrangeDataForGrid } from '@utils/arrangeData';
 import { GridMediaItem } from 'src/feed/types';
-
-const MAX_POST_COUNT = 6;
 
 const Search = () => {
   const posts = useGridPosts(1);
@@ -43,8 +41,6 @@ const Search = () => {
         photos.push(...filteredPhotos);
       }
     });
-
-    console.log('videos', videos, 'photos', photos);
 
     const allItemsLength = videos.length + photos.length;
     const itemCount = Math.ceil(allItemsLength / 5);

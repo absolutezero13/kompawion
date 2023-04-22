@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FlatList, View } from 'react-native';
-import usePosts from '@hooks/usePosts';
+import usePosts, { MAX_POST_COUNT } from '@hooks/usePosts';
 import SearchInput from '@components/SearchInput';
 import Container from '@components/Container';
 import { useNavigation } from '@react-navigation/native';
@@ -10,8 +10,6 @@ import Post from './views/Posts';
 import Header from './views/Header';
 import Stories from './views/Stories';
 import { styles } from './styles';
-
-const MAX_POST_COUNT = 10;
 
 const Home = () => {
   const navigation = useNavigation<RootNavigationProp>();

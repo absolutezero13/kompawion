@@ -198,5 +198,95 @@ export const posts = [
       }
     ],
     createdAt: new Date('2023-04-20T12:00:00.000Z')
+  },
+  {
+    id: 11,
+    username: '',
+    userAvatar: '',
+    mediaItems: [],
+    caption: 'A beautiful day in the neighborhood',
+    likes: 35,
+    userLiked: false,
+    comments: [
+      {
+        id: 1,
+        text: 'Nice!',
+        username: 'johndoe',
+        userAvatar: ''
+      }
+    ],
+    createdAt: new Date('2023-04-20T12:00:00.000Z')
+  },
+  {
+    id: 12,
+    username: '',
+    userAvatar: '',
+    mediaItems: [],
+    caption: 'A beautiful day in the neighborhood',
+    likes: 35,
+    userLiked: false,
+    comments: [
+      {
+        id: 1,
+        text: 'Nice!',
+        username: 'johndoe',
+        userAvatar: ''
+      }
+    ],
+    createdAt: new Date('2023-04-20T12:00:00.000Z')
+  },
+  {
+    id: 13,
+    username: '',
+    userAvatar: '',
+    mediaItems: [],
+    caption: 'A beautiful day in the neighborhood',
+    likes: 35,
+    userLiked: false,
+    comments: [
+      {
+        id: 1,
+        text: 'Nice!',
+        username: 'johndoe',
+        userAvatar: ''
+      }
+    ],
+    createdAt: new Date('2023-04-20T12:00:00.000Z')
+  },
+  {
+    id: 14,
+    username: '',
+    userAvatar: '',
+    mediaItems: [],
+    caption: 'A beautiful day in the neighborhood',
+    likes: 35,
+    userLiked: false,
+    comments: [
+      {
+        id: 1,
+        text: 'Nice!',
+        username: 'johndoe',
+        userAvatar: ''
+      }
+    ],
+    createdAt: new Date('2023-04-20T12:00:00.000Z')
+  },
+  {
+    id: 15,
+    username: '',
+    userAvatar: '',
+    mediaItems: [],
+    caption: 'A beautiful day in the neighborhood',
+    likes: 35,
+    userLiked: false,
+    comments: [
+      {
+        id: 1,
+        text: 'Nice!',
+        username: 'johndoe',
+        userAvatar: ''
+      }
+    ],
+    createdAt: new Date('2023-04-20T12:00:00.000Z')
   }
 ] as Post[];
