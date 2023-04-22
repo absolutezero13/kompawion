@@ -1,21 +1,23 @@
+import { useMemo, useState } from 'react';
 import { FlatList } from 'react-native';
 import Container from '@components/Container';
 import SearchInput from '@components/SearchInput';
 import FadeInView from '@components/FadeInView';
 import useGridPosts, { MAX_POST_COUNT } from '@hooks/useGridPosts';
 
-import GridItem from './views/GridItem';
-import { styles } from './styles';
-import { useCallback, useMemo, useState } from 'react';
 import { arrangeDataForGrid } from '@utils/arrangeData';
 import { GridMediaItem } from 'src/feed/types';
 import { Photo, Video } from 'src/api/types';
+import GridItem from './views/GridItem';
+import { styles } from './styles';
+
+const INITIAL_NUMBER_OF_POSTS = 3;
 
 const Search = () => {
-  const posts = useGridPosts(1);
+  const posts = useGridPosts();
+
   const [searchText, setSearchText] = useState<string>('');
-  const [numberOfPosts, setNumberOfPosts] = useState(3);
-  const [viewableItems, setViewableItems] = useState([] as GridMediaItem[]);
+  const [numberOfPosts, setNumberOfPosts] = useState(INITIAL_NUMBER_OF_POSTS);
 
   const filteredPosts = useMemo(() => {
     if (!searchText) {
@@ -55,40 +57,15 @@ const Search = () => {
     return arrangedData;
   }, [posts, searchText]);
 
-  const onViewableItemsChanged = useCallback(({ viewableItems, changed }) => {
-    // console.log('Changed in this iteration', changed);
-    setViewableItems(viewableItems);
-  }, []);
-
-  console.log('Visible items are', viewableItems);
-
   return (
     <Container>
       <FadeInView>
         <SearchInput focusOnMount value={searchText} setValue={setSearchText} />
         <FlatList
-          onViewableItemsChanged={onViewableItemsChanged}
-          viewabilityConfig={{
-            itemVisiblePercentThreshold: 50
-          }}
           data={filteredPosts.slice(0, numberOfPosts)}
-          renderItem={({ item, index }) => {
-            let shouldRender = true;
-
-            if (viewableItems.length) {
-              shouldRender = viewableItems.some(viewableItem => {
-                console.log('viewableItem', viewableItem.item.id);
-                console.log('item', item.id);
-                return viewableItem.item.id !== item.id;
-              });
-            }
-
-            if (!shouldRender) {
-              return null;
-            }
-
-            return <GridItem item={item} index={index} />;
-          }}
+          renderItem={({ item, index }) => (
+            <GridItem item={item} index={index} />
+          )}
           style={styles.list}
           keyExtractor={item => item.id.toString()}
           showsVerticalScrollIndicator={false}

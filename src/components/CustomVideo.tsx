@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
+import { Alert, TouchableWithoutFeedback } from 'react-native';
 import Video from 'react-native-video';
 
 import { Video as TVideo } from 'src/api/types';
@@ -20,6 +20,8 @@ const CustomVideo = ({ item }: { item: TVideo }) => {
   return (
     <TouchableWithoutFeedback onPress={handleVideoPress}>
       <Video
+        minLoadRetryCount={5}
+        onError={e => Alert.alert('Error', e.error.errorString)}
         poster={item.video_pictures[0].picture}
         posterResizeMode='cover'
         ref={videoRef}

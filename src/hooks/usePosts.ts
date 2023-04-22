@@ -6,7 +6,7 @@ import { getPhotos, getVideos } from '../api/post';
 
 export const MAX_POST_COUNT = 30;
 
-const usePosts = (userId: number) => {
+const usePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const fetchPosts = async () => {
@@ -25,15 +25,19 @@ const usePosts = (userId: number) => {
         // ONE POST VIDEO - ONE POST PHOTO
         const shouldGetVideo = index % 2 !== 0;
 
+        const username = shouldGetVideo
+          ? videos[videosIndex].user.name
+          : photos[photosIndex].photographer;
+
+        const mediaItems = shouldGetVideo
+          ? videos.slice(videosIndex, videosIndex + 1)
+          : photos.slice(photosIndex, photosIndex + 2);
+
         return {
           ...post,
           userAvatar: `https://picsum.photos/200?random=${index}`,
-          username: shouldGetVideo
-            ? videos[videosIndex].user.name
-            : photos[photosIndex].photographer,
-          mediaItems: shouldGetVideo
-            ? videos.slice(videosIndex, videosIndex + 1)
-            : photos.slice(photosIndex, photosIndex + 2)
+          username,
+          mediaItems
         };
       });
 

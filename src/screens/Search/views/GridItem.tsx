@@ -54,11 +54,7 @@ const GridItem = ({ item, index }: GridItemProps) => {
   const videoInTheBeginning = index % 2 === 0;
 
   return (
-    <View
-      style={{
-        flexDirection: 'row'
-      }}
-    >
+    <View style={styles.gridWrapper}>
       {videoInTheBeginning && <GridVideo item={item} />}
       <FlatList
         data={item.mediaItems.filter(

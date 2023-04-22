@@ -4,6 +4,9 @@ import { Metrics } from '@theme/metrics';
 const ITEM_WIDTH = Metrics.SCREEN_WIDTH / 3;
 
 export const styles = StyleSheet.create({
+  gridWrapper: {
+    flexDirection: 'row'
+  },
   list: {
     flex: 1,
     marginTop: 10
@@ -22,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   loading: {
     position: 'absolute',
-    width: Metrics.SCREEN_WIDTH / 3,
-    height: Metrics.SCREEN_WIDTH / 3
+    width: ITEM_WIDTH,
+    height: ITEM_WIDTH
   }
 });

@@ -6,7 +6,7 @@ import { Photo, Video } from 'src/api/types';
 
 export const MAX_POST_COUNT = 12;
 
-const useGridPosts = (userId: number) => {
+const useGridPosts = () => {
   const [posts, setPosts] = useState<GridPost[]>([]);
 
   const fetchPosts = async () => {

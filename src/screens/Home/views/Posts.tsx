@@ -126,12 +126,12 @@ const Post = ({ item }: Item) => {
         bounces={item.mediaItems.length > 1}
         onScroll={onScroll}
         scrollEventThrottle={16}
-        renderItem={({ item, index }) => {
+        renderItem={({ item }) => {
           return (item as Video).duration ? (
             <CustomVideo item={item as Video} />
           ) : (
             <Image
-              source={{ uri: (item as Photo).src?.large2x }}
+              source={{ uri: (item as Photo).src.large2x }}
               style={styles.postPicture}
             />
           );

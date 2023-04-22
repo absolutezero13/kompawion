@@ -11,10 +11,12 @@ import Header from './views/Header';
 import Stories from './views/Stories';
 import { styles } from './styles';
 
+const INITIAL_NUMBER_OF_POSTS = 3;
+
 const Home = () => {
   const navigation = useNavigation<TabNavigationProp>();
-  const posts = usePosts(1);
-  const [numberOfPosts, setNumberOfPosts] = useState(3);
+  const posts = usePosts();
+  const [numberOfPosts, setNumberOfPosts] = useState(INITIAL_NUMBER_OF_POSTS);
 
   return (
     <Container>
