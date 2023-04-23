@@ -58,10 +58,12 @@ const Search = () => {
     return arrangedData;
   }, [posts, searchText]);
 
-  const onViewableItemsChanged = useCallback(({ viewableItems, changed }) => {
-    // console.log('Changed in this iteration', changed);
-    setViewableItems(viewableItems);
-  }, []);
+  const onViewableItemsChanged = useCallback(
+    ({ viewableItems }: { viewableItems: any }) => {
+      setViewableItems(viewableItems);
+    },
+    []
+  );
 
   return (
     <Container>
@@ -77,12 +79,6 @@ const Search = () => {
                 return viewableItem.item.id === item.id;
               });
             }
-
-            console.log(
-              'shouldRenderHightQuality',
-              shouldRenderHightQuality,
-              item.id
-            );
 
             return (
               <GridItem

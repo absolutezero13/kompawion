@@ -9,6 +9,7 @@ import { styles } from '../styles';
 interface GridItemProps {
   item: GridPost;
   index: number;
+  shouldRenderHightQuality: boolean;
 }
 
 const GridVideo = ({ item }: { item: GridPost }) => {
@@ -33,7 +34,13 @@ const GridVideo = ({ item }: { item: GridPost }) => {
   );
 };
 
-const GridPhoto = ({ photo, shouldRenderHightQuality }: { photo: Photo }) => {
+const GridPhoto = ({
+  photo,
+  shouldRenderHightQuality
+}: {
+  photo: Photo;
+  shouldRenderHightQuality: boolean;
+}) => {
   const [loading, setLoading] = useState(false);
 
   return (
