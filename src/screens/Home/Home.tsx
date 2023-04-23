@@ -23,9 +23,10 @@ const Home = () => {
       <Header />
       <SearchInput onPressIn={() => navigation.navigate('Search')} />
       <FlatList
-        ListHeaderComponent={Stories}
         data={posts.slice(0, numberOfPosts)}
         renderItem={({ item }) => <Post item={item} />}
+        initialNumToRender={INITIAL_NUMBER_OF_POSTS}
+        ListHeaderComponent={Stories}
         ItemSeparatorComponent={() => <View style={styles.postSeperator} />}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={{

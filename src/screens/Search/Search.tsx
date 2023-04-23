@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { FlatList } from 'react-native';
 import Container from '@components/Container';
 import SearchInput from '@components/SearchInput';
@@ -18,6 +18,7 @@ const Search = () => {
 
   const [searchText, setSearchText] = useState<string>('');
   const [numberOfPosts, setNumberOfPosts] = useState(INITIAL_NUMBER_OF_POSTS);
+  const [viewableItems, setViewableItems] = useState([] as GridMediaItem[]);
 
   const filteredPosts = useMemo(() => {
     if (!searchText) {
@@ -57,15 +58,44 @@ const Search = () => {
     return arrangedData;
   }, [posts, searchText]);
 
+  const onViewableItemsChanged = useCallback(({ viewableItems, changed }) => {
+    // console.log('Changed in this iteration', changed);
+    setViewableItems(viewableItems);
+  }, []);
+
   return (
     <Container>
       <FadeInView>
         <SearchInput focusOnMount value={searchText} setValue={setSearchText} />
         <FlatList
           data={filteredPosts.slice(0, numberOfPosts)}
-          renderItem={({ item, index }) => (
-            <GridItem item={item} index={index} />
-          )}
+          renderItem={({ item, index }) => {
+            let shouldRenderHightQuality = true;
+
+            if (viewableItems.length) {
+              shouldRenderHightQuality = !!viewableItems.find(viewableItem => {
+                return viewableItem.item.id === item.id;
+              });
+            }
+
+            console.log(
+              'shouldRenderHightQuality',
+              shouldRenderHightQuality,
+              item.id
+            );
+
+            return (
+              <GridItem
+                item={item}
+                index={index}
+                shouldRenderHightQuality={shouldRenderHightQuality}
+              />
+            );
+          }}
+          onViewableItemsChanged={onViewableItemsChanged}
+          viewabilityConfig={{
+            itemVisiblePercentThreshold: 50
+          }}
           style={styles.list}
           keyExtractor={item => item.id.toString()}
           showsVerticalScrollIndicator={false}

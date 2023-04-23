@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import { Alert, TouchableWithoutFeedback } from 'react-native';
 import Video from 'react-native-video';
 
@@ -21,7 +21,9 @@ const CustomVideo = ({ item }: { item: TVideo }) => {
     <TouchableWithoutFeedback onPress={handleVideoPress}>
       <Video
         minLoadRetryCount={5}
-        onError={e => Alert.alert('Error', e.error.errorString)}
+        onError={e =>
+          Alert.alert('Error', 'Something went wrong while playing video.')
+        }
         poster={item.video_pictures[0].picture}
         posterResizeMode='cover'
         ref={videoRef}
@@ -42,4 +44,4 @@ const CustomVideo = ({ item }: { item: TVideo }) => {
   );
 };
 
-export default CustomVideo;
+export default memo(CustomVideo);

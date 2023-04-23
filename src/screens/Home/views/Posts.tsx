@@ -107,6 +107,17 @@ const Time = ({ item }: Item) => (
   </View>
 );
 
+const RenderItem = ({ item }: { item: Video | Photo }) => {
+  return (item as Video).duration ? (
+    <CustomVideo item={item as Video} />
+  ) : (
+    <Image
+      source={{ uri: (item as Photo).src.large2x, cache: 'force-cache' }}
+      style={styles.postPicture}
+    />
+  );
+};
+
 const Post = ({ item }: Item) => {
   const flatListRef = useRef(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -126,16 +137,7 @@ const Post = ({ item }: Item) => {
         bounces={item.mediaItems.length > 1}
         onScroll={onScroll}
         scrollEventThrottle={16}
-        renderItem={({ item }) => {
-          return (item as Video).duration ? (
-            <CustomVideo item={item as Video} />
-          ) : (
-            <Image
-              source={{ uri: (item as Photo).src.large2x }}
-              style={styles.postPicture}
-            />
-          );
-        }}
+        renderItem={RenderItem}
         keyExtractor={item => item.id.toString()}
         horizontal
         pagingEnabled

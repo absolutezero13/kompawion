@@ -33,14 +33,17 @@ const GridVideo = ({ item }: { item: GridPost }) => {
   );
 };
 
-const GridPhoto = ({ photo }: { photo: Photo }) => {
+const GridPhoto = ({ photo, shouldRenderHightQuality }: { photo: Photo }) => {
   const [loading, setLoading] = useState(false);
 
   return (
     <View>
       {loading && <ActivityIndicator style={styles.loading} />}
       <Image
-        source={{ uri: photo.src.large2x }}
+        source={{
+          uri: shouldRenderHightQuality ? photo.src.large2x : photo.src.small,
+          cache: 'force-cache'
+        }}
         progressiveRenderingEnabled
         style={styles.photo}
         onLoadStart={() => setLoading(true)}
@@ -50,7 +53,7 @@ const GridPhoto = ({ photo }: { photo: Photo }) => {
   );
 };
 
-const GridItem = ({ item, index }: GridItemProps) => {
+const GridItem = ({ item, index, shouldRenderHightQuality }: GridItemProps) => {
   const videoInTheBeginning = index % 2 === 0;
 
   return (
@@ -60,7 +63,12 @@ const GridItem = ({ item, index }: GridItemProps) => {
         data={item.mediaItems.filter(
           mediaItem => mediaItem?.mediaType === 'photo'
         )}
-        renderItem={({ item }) => <GridPhoto photo={item as Photo} />}
+        renderItem={({ item }) => (
+          <GridPhoto
+            shouldRenderHightQuality={shouldRenderHightQuality}
+            photo={item as Photo}
+          />
+        )}
         keyExtractor={item => item.id.toString()}
         numColumns={2}
         scrollEnabled={false}
