@@ -44,7 +44,7 @@ export const posts = [
         username: 'reesewitherspoon'
       }
     ],
-    createdAt: new Date('2023-04-20T12:00:00.000Z')
+    createdAt: new Date('2023-04-13T12:00:00.000Z')
   },
   {
     id: 2,
@@ -67,7 +67,7 @@ export const posts = [
         username: 'barackobama'
       }
     ],
-    createdAt: new Date('2023-04-20T12:00:00.000Z')
+    createdAt: new Date('2023-03-20T12:00:00.000Z')
   },
   {
     id: 3,
@@ -79,7 +79,7 @@ export const posts = [
     likes: 35,
     userLiked: false,
     comments: [],
-    createdAt: new Date('2023-04-20T12:00:00.000Z')
+    createdAt: new Date('2023-02-20T12:00:00.000Z')
   },
   {
     id: 4,
@@ -98,7 +98,7 @@ export const posts = [
         username: 'sethmeyers'
       }
     ],
-    createdAt: new Date('2023-04-20T12:00:00.000Z')
+    createdAt: new Date('2023-04-23T12:00:00.000Z')
   },
   {
     id: 5,
@@ -110,7 +110,7 @@ export const posts = [
     likes: 35,
     userLiked: false,
     comments: [],
-    createdAt: new Date('2023-04-20T12:00:00.000Z')
+    createdAt: new Date('2023-04-22T12:00:00.000Z')
   },
   {
     id: 6,
@@ -128,7 +128,7 @@ export const posts = [
         username: 'sedefavcioglu'
       }
     ],
-    createdAt: new Date('2023-04-20T12:00:00.000Z')
+    createdAt: new Date('2023-02-20T12:00:00.000Z')
   },
   {
     id: 7,
@@ -140,7 +140,7 @@ export const posts = [
     likes: 35,
     userLiked: false,
     comments: [],
-    createdAt: new Date('2023-04-20T12:00:00.000Z')
+    createdAt: new Date('2022-04-20T12:00:00.000Z')
   },
   {
     id: 8,
@@ -157,7 +157,7 @@ export const posts = [
         username: 'demetozdemir'
       }
     ],
-    createdAt: new Date('2023-04-20T12:00:00.000Z')
+    createdAt: new Date('2021-04-20T12:00:00.000Z')
   },
   {
     id: 9,
@@ -175,7 +175,7 @@ export const posts = [
         username: 'asli_enver'
       }
     ],
-    createdAt: new Date('2023-04-20T12:00:00.000Z')
+    createdAt: new Date('2023-04-03T12:00:00.000Z')
   },
   {
     id: 10,
