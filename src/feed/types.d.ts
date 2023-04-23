@@ -1,5 +1,11 @@
 import { Photo, Video, VideoFile } from '../api/types';
 
+export interface Comment {
+  id: number;
+  text: string;
+  username: string;
+}
+
 export interface Post {
   id: number;
   username: string;
@@ -8,10 +14,9 @@ export interface Post {
   caption: string;
   likes: number;
   userLiked: boolean;
-  comments: any[]; // TODO: Create Comment type
+  comments: Comment[];
   createdAt: Date;
 }
-
 export interface Story {
   id: number;
   username: string;
